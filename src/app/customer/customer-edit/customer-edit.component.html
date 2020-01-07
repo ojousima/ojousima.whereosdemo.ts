@@ -1,6 +1,6 @@
 <div>
   <form (ngSubmit)="submit()" #customerForm="ngForm" class="customer-form" novalidate>
-    <div class="form-group">
+    <!--<div class="form-group">
       <label>First Name</label>
       <input type="text" class="form-control" name="firstName" [(ngModel)]="customer.firstName" #firstName="ngModel" required>
       <div class="alert alert-danger" [hidden]="firstName.pristine || firstName.valid">First Name is required</div>
@@ -41,7 +41,7 @@
         <button type="submit" class="btn btn-success" [disabled]="customerForm.pristine || !customerForm.valid">{{ operationText }}</button>
       </div>
     </div>
-    <div class="alert alert-danger" *ngIf="errorMessage != null">{{ errorMessage }}</div>
+    <div class="alert alert-danger" *ngIf="errorMessage != null">{{ errorMessage }}</div>-->
   </form>
   <br />
 </div>
