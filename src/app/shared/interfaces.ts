@@ -1,18 +1,14 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes } from '@angular/router';
 
+
 export interface ICustomer {
     id: number;
-    firstName: string;
-    lastName: string;
-    gender: string;
-    address: string;
-    city: string;
-    state: IState;
-    orders?: IOrder[];
-    orderTotal?: number;
-    latitude?: number;
-    longitude?: number;
+    name: string;
+    location: string;
+    rssi: number;
+    temperature: number;
+    humidity?: number;
 }
 
 export interface IState {

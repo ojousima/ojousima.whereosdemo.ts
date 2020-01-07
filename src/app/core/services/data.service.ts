@@ -30,7 +30,7 @@ export class DataService {
                 map(res => {
                     const totalRecords = +res.headers.get('X-InlineCount');
                     const customers = res.body as ICustomer[];
-                    this.calculateCustomersOrderTotal(customers);
+                    // this.calculateCustomersOrderTotal(customers);
                     return {
                         results: customers,
                         totalRecords: totalRecords
@@ -44,7 +44,7 @@ export class DataService {
         return this.http.get<ICustomer[]>(this.customersBaseUrl)
             .pipe(
                 map(customers => {
-                    this.calculateCustomersOrderTotal(customers);
+                    // this.calculateCustomersOrderTotal(customers);
                     return customers;
                 }),
                 catchError(this.handleError)
@@ -55,7 +55,7 @@ export class DataService {
         return this.http.get<ICustomer>(this.customersBaseUrl + '/' + id)
             .pipe(
                 map(customer => {
-                    this.calculateCustomersOrderTotal([customer]);
+                    // this.calculateCustomersOrderTotal([customer]);
                     return customer;
                 }),
                 catchError(this.handleError)
@@ -99,17 +99,17 @@ export class DataService {
         return Observable.throw(error || 'Node.js server error');
     }
 
-    calculateCustomersOrderTotal(customers: ICustomer[]) {
-        for (const customer of customers) {
-            if (customer && customer.orders) {
-                let total = 0;
-                for (const order of customer.orders) {
-                    total += order.itemCost;
-                }
-                customer.orderTotal = total;
-            }
-        }
-    }
+    // calculateCustomersOrderTotal(customers: ICustomer[]) {
+    //     for (const customer of customers) {
+    //         if (customer && customer.temperature) {
+    //             let total = 0;
+    //             for (const order of customer.orders) {
+    //                 total += order.itemCost;
+    //             }
+    //             customer.orderTotal = total;
+    //         }
+    //     }
+    // }
 
     // Not using now but leaving since they show how to create
     // and work with custom observables

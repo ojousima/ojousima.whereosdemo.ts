@@ -15,10 +15,10 @@ const sandboxConfig = {
   providers: [
     { provide: DataService, useClass: MockDataService }
 ],
-  label: 'Customers Component'
+  label: 'RuuviTags Component'
 };
 
 export default sandboxOf(CustomersComponent, sandboxConfig)
-  .add('With Customers', {
+  .add('With RuuviTags', {
     template: `<cm-customers></cm-customers>`
   });

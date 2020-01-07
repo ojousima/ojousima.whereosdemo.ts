@@ -18,15 +18,11 @@ export class CustomerEditComponent implements OnInit {
   customer: ICustomer =
     {
       id: 0,
-      firstName: '',
-      lastName: '',
-      gender: '',
-      address: '',
-      city: '',
-      state: {
-        abbreviation: '',
-        name: ''
-      }
+      name: '',
+      rssi: -100,
+      temperature: 0,
+      humidity: 0,
+      location: ''
     };
   states: IState[];
   errorMessage: string;

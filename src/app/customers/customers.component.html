@@ -26,11 +26,6 @@
                                 <span class="glyphicon glyphicon-map-marker"></span> Map View
                             </a>
                         </li>
-                        <li class="toolbar-item">
-                            <a routerLink="/customers/0/edit">
-                                <span class="glyphicon glyphicon-plus"></span> New Customer
-                            </a>
-                        </li>
                     </ul>
                     <cm-filter-textbox class="navbar-right"
                      (changed)="filterChanged($event)"></cm-filter-textbox>
@@ -46,7 +41,7 @@
           [customers]="filteredCustomers" 
           [hidden]="displayMode !== displayModeEnum.Grid"></cm-customers-grid>
 
-        <cm-map *ngIf="filteredCustomers.length" 
+        <!--<cm-map *ngIf="filteredCustomers.length" 
             [zoom]="2" 
             [enabled]="displayMode === displayModeEnum.Map" 
             [hidden]="displayMode !== displayModeEnum.Map">
@@ -55,7 +50,7 @@
             [latitude]="customer.latitude" 
             [longitude]="customer.longitude"
             [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</a></h3>' + customer.city + ', ' + customer.state.name"></cm-map-point>
-        </cm-map>
+        </cm-map>-->
 
         <cm-pagination
             [totalItems]="totalRecords" 

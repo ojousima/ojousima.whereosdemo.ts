@@ -15,14 +15,14 @@ const sandboxConfig = {
         return route;
       }}
   ],
-  label: 'Customer Details Component'
+  label: 'RuuviTag Details Component'
 };
 
 export default sandboxOf(CustomerDetailsComponent, sandboxConfig)
-  .add('With a Customer', {
+  .add('With a RuuviTag', {
     template: `<cm-customer-details></cm-customer-details>`
   })
-  .add('Without a Customer', {
+  .add('Without a RuuviTag', {
     template: `<cm-customer-details></cm-customer-details>`,
     providers: [
       { provide: ActivatedRoute, useFactory: () => {

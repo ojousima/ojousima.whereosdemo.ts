@@ -25,8 +25,8 @@ export class CustomersComponent implements OnInit {
     private logger: LoggerService) { }
 
   ngOnInit() {
-    this.title = 'Customers';
-    this.filterText = 'Filter Customers:';
+    this.title = 'RuuviTags';
+    this.filterText = 'Filter RuuviTags:';
     this.displayMode = DisplayModeEnum.Card;
 
     this.getCustomersPage(1);
@@ -53,7 +53,7 @@ export class CustomersComponent implements OnInit {
   filterChanged(data: string) {
     if (data && this.customers) {
         data = data.toUpperCase();
-        const props = ['firstName', 'lastName', 'city', 'state.name'];
+        const props = ['rssi', 'temperature', 'name', 'humidity', 'location', 'id'];
         this.filteredCustomers = this.filterService.filter<ICustomer>(this.customers, data, props);
     } else {
       this.filteredCustomers = this.customers;
