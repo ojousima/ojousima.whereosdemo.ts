@@ -6,16 +6,12 @@
                     <a [routerLink]="['/customers',customer.id,'details']" class="white">
                          {{ customer.name | capitalize }} at {{ customer.location | capitalize }}
                     </a>
-                    <a [routerLink]="['/customers',customer.id,'edit']">
-                        <i title="Edit"  
-                           class="pull-right glyphicon glyphicon-edit edit-icon white"></i>
-                    </a>
                 </div>
                 <div class="card-body">
                     <div class="clearfix">
                         <div class="pull-left card-body-left">
                             <a href="#" class="white">
-                                <img src="assets/images/{{customer.gender | lowercase}}.png" class="card-image" />
+                                <img src="assets/images/ruuvilogo.png" class="card-image" />
                             </a>
                         </div>
                         <div class="pull-left card-body-right">

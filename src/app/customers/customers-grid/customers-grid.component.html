@@ -6,23 +6,23 @@
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
+                            <th cmSortBy="name" (sorted)="sort($event)">Name</th>
+                            <th cmSortBy="location" (sorted)="sort($event)">Location</th>
                             <th cmSortBy="temperature" (sorted)="sort($event)">Temperature</th>
                             <th cmSortBy="humidity" (sorted)="sort($event)">Humidity</th>
                             <th cmSortBy="rssi" (sorted)="sort($event)">RSSI</th>
-                            <th cmSortBy="location" (sorted)="sort($event)">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let customer of customers;trackBy:trackbyService.customer">
-                            <td><img src="assets/images/{{ customer.gender | lowercase }}.png"
+                            <td><img src="assets/images/ruuvilogo.png"
                                     class="grid-image" alt="Customer Image" /></td>
                             <td><a [routerLink]="['/customers',customer.id,'details']">{{ customer.name | capitalize }}</a></td>
-                            <td>{{ customer.name | capitalize }}</td>
+                            <td>{{ customer.location }}</td>
                             <td>{{ customer.temperature }}</td>
                             <td>{{ customer.humidity }}</td>
                             <td>{{ customer.rssi}}</td>
-                            <td>{{ customer.location }}</td>
                         </tr>
                         <tr *ngIf="!customers.length">
                             <td>&nbsp;</td>

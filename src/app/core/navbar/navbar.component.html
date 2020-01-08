@@ -10,14 +10,12 @@
             </button>
             <a class="navbar-brand" routerLink="/customers">
                 <img src="assets/images/people.png" alt="logo" />
-                <span class="app-title">Customer Manager</span>
+                <span class="app-title">RuuviTag Manager</span>
             </a>
             <span class="navbar-collapse" [attr.data-collapse]="isCollapsed">
                 <ul class="nav navbar-nav nav-pills navBarPadding">
-                    <li routerLinkActive="active"><a routerLink="/customers">Customers</a></li>
-                    <li routerLinkActive="active"><a routerLink="/orders">Orders</a></li>
+                    <li routerLinkActive="active"><a routerLink="/customers">RuuviTags</a></li>
                     <li routerLinkActive="active"><a routerLink="/about">About</a></li>
-                    <li routerLinkActive="active" (click)="loginOrOut()"><a>{{ loginLogoutText }}</a></li>
                 </ul>
             </span>
         </div>

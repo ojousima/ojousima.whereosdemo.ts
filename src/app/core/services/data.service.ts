@@ -11,8 +11,8 @@ export class DataService {
 
     // Can use /api/customers and /api/orders below when running locally
     // Full domain/port is included for Docker example or if it were to run in the cloud
-    port = '8080';
-    baseUrl = `${this.window.location.protocol}//${this.window.location.hostname}:${this.port}`;
+    //port = '8080';
+    baseUrl = `${this.window.location.protocol}//${this.window.location.hostname}:${this.window.location.port}`;
     customersBaseUrl = this.baseUrl + '/api/customers';
     ordersBaseUrl = this.baseUrl + '/api/orders';
     orders: IOrder[];

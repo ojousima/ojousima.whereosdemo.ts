@@ -1,10 +1,26 @@
 [
     {
-    "rssi": -65.80439905734485,
-    "temperature": 23.895153181461087,
-    "name": "coffeemachine",
-    "humidity": 38.94879811468966,
-    "location": "office",
-    "id": 1
+        "rssi": -53,
+        "temperature": 23.9,
+        "name": "Mysterybox",
+        "humidity": 26.31,
+        "location": "office",
+        "id": "C4:AB:0F:E2:9B:98"
+    },
+    {
+        "rssi": -54.28680981595092,
+        "temperature": 23.66819018404908,
+        "name": "Teapot",
+        "humidity": 31.37377300613497,
+        "location": "office",
+        "id": "DA:3E:ED:2B:0E:B9"
+    },
+    {
+        "rssi": -64.51688411358404,
+        "temperature": 23.077482732156515,
+        "name": "coffeemachine",
+        "humidity": 36.60400613967765,
+        "location": "office",
+        "id": "DA:B5:9B:DF:A9:BB"
     }
 ]
