@@ -60,6 +60,7 @@ export class CustomerEditComponent implements OnInit {
 
   submit() {
     if (this.customer.id === 0) {
+      /*
       this.dataService.insertCustomer(this.customer)
         .subscribe((insertedCustomer: ICustomer) => {
           if (insertedCustomer) {
@@ -73,7 +74,9 @@ export class CustomerEditComponent implements OnInit {
           }
         },
           (err: any) => this.logger.log(err));
+          */
     } else {
+      /*
       this.dataService.updateCustomer(this.customer)
         .subscribe((status: boolean) => {
           if (status) {
@@ -88,6 +91,7 @@ export class CustomerEditComponent implements OnInit {
           }
         },
           (err: any) => this.logger.log(err));
+          */
     }
   }
 
@@ -99,6 +103,7 @@ export class CustomerEditComponent implements OnInit {
 
   delete(event: Event) {
     event.preventDefault();
+    /*
     this.dataService.deleteCustomer(this.customer.id)
       .subscribe((status: boolean) => {
         if (status) {
@@ -108,6 +113,7 @@ export class CustomerEditComponent implements OnInit {
         }
       },
         (err) => this.logger.log(err));
+        */
   }
 
   canDeactivate(): Promise<boolean> | boolean {

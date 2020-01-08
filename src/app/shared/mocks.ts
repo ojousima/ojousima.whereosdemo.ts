@@ -3,14 +3,56 @@ import { ActivatedRouteSnapshot, ActivatedRoute, UrlSegment, Params, Data, Route
 
 import { Observable, of } from 'rxjs';
 
-import { ICustomer, IPagedResults } from './interfaces';
+import { ICustomer, IRuuviTag, IPagedResults } from './interfaces';
 
 export class MockDataService {
     constructor() {}
 
+    private parseHexString(str: string): number { 
+        let result = 0;
+        // Ignore any trailing single digit; I don't know what your needs
+        // are for this case, so you may want to throw an error or convert
+        // the lone digit depending on your needs.
+        str = str.replace(/^:/, '');
+         while (str.length >= 2) { 
+             result *= 256;
+             result += parseInt(str.substring(0, 2), 16)
+             str = str.substring(2, str.length);     
+        }
+
+        return result;
+    }
+
+    ruuviTagToCustomer(ruuvitag: IRuuviTag): ICustomer {
+        let customer = {
+                id: this.parseHexString(ruuvitag.id),
+                rssi: ruuvitag.rssi,
+                temperature: ruuvitag.temperature,
+                humidity: ruuvitag.humidity,
+                location: ruuvitag.location,
+                name: ruuvitag.name
+        }
+        return customer;
+    }
+
+    ruuviTagsToCustomers(ruuvitags: IRuuviTag[]): ICustomer[] {
+        let customers: ICustomer[];
+        for (const ruuvitag of ruuvitags) {
+            let customer = {
+                id: this.parseHexString(ruuvitag.id),
+                rssi: ruuvitag.rssi,
+                temperature: ruuvitag.temperature,
+                humidity: ruuvitag.humidity,
+                location: ruuvitag.location,
+                name: ruuvitag.name
+            }
+        }
+        return customers;
+    }
+
     getCustomer(id: number): Observable<ICustomer> {
         if (id === 1) {
-            return of(customers.slice(0, 1)[0]);
+            return of(this.ruuviTagToCustomer(customers.slice(0, 1)[0]));
         } else {
             return of(null);
         }
@@ -28,12 +70,12 @@ export class MockDataService {
 
         return of({
             totalRecords: customers.length,
-            results: customers.slice(skip, top)
+            results: this.ruuviTagsToCustomers(customers.slice(skip, top))
         });
     }
 
     getCustomers(): Observable<ICustomer[]> {
-        return of(customers);
+        return of(this.ruuviTagsToCustomers(customers));
     }
 }
 

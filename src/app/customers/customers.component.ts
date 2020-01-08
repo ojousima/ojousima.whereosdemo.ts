@@ -47,7 +47,7 @@ export class CustomersComponent implements OnInit {
           this.totalRecords = response.totalRecords;
         },
         (err: any) => this.logger.log(err),
-        () => this.logger.log('getCustomersPage() retrieved customers for page: ' + page));
+        () => this.logger.log('getCustomersPage() retrieved ' + this.totalRecords + ' customers for page: ' + page));
   }
 
   filterChanged(data: string) {

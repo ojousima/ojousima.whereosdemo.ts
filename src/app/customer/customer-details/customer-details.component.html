@@ -1,7 +1,7 @@
 <div class="container" *ngIf="customer">
   <div class="row">
     <div class="col-md-2">
-      <img src="assets/images/{{customer.gender | lowercase}}.png" class="details-image" />
+      <img src="assets/images/ruuvilogo.png" class="details-image" />
     </div>
     <div class="col-md-10">
       <h4>    
@@ -15,15 +15,15 @@
   </div>    
   <br /><br />
   <div class="row">
-    <div class="col-md-12" *ngIf="customer && customer.latitude && customer.longitude">
+    <!--<div class="col-md-12" *ngIf="customer && customer.latitude && customer.longitude">
       <cm-map [latitude]="customer.latitude" 
            [longitude]="customer.longitude" 
            [zoom]="10" 
            [enabled]="mapEnabled"
            [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</h3>' + customer.city + ', ' + customer.state.name"></cm-map>
-    </div>
+    </div>-->
   </div>
 </div>   
 <div *ngIf="!customer" class="container">
-   No customer found
+   No RuuviTag found
 </div>

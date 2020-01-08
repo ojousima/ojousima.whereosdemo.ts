@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { ICustomer, IOrder, IState, IPagedResults, IApiResponse } from '../../shared/interfaces';
+import { ICustomer, IOrder, IRuuviTag, IState, IPagedResults, IApiResponse } from '../../shared/interfaces';
 
 @Injectable()
 export class DataService {
@@ -23,16 +23,16 @@ export class DataService {
     }
 
     getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {
-        return this.http.get<ICustomer[]>(
+        return this.http.get<IRuuviTag[]>(
             `${this.customersBaseUrl}/page/${page}/${pageSize}`,
             { observe: 'response' })
             .pipe(
                 map(res => {
                     const totalRecords = +res.headers.get('X-InlineCount');
-                    const customers = res.body as ICustomer[];
+                    const ruuvitags = res.body as IRuuviTag[];
                     // this.calculateCustomersOrderTotal(customers);
                     return {
-                        results: customers,
+                        results: this.calculateCustomersOrderTotal(ruuvitags),
                         totalRecords: totalRecords
                     };
                 }),
@@ -41,10 +41,10 @@ export class DataService {
     }
 
     getCustomers(): Observable<ICustomer[]> {
-        return this.http.get<ICustomer[]>(this.customersBaseUrl)
+        return this.http.get<IRuuviTag[]>(this.customersBaseUrl)
             .pipe(
-                map(customers => {
-                    // this.calculateCustomersOrderTotal(customers);
+                map(ruuvitags => {
+                    let customers = this.calculateCustomersOrderTotal(ruuvitags);
                     return customers;
                 }),
                 catchError(this.handleError)
@@ -52,16 +52,16 @@ export class DataService {
     }
 
     getCustomer(id: number): Observable<ICustomer> {
-        return this.http.get<ICustomer>(this.customersBaseUrl + '/' + id)
+        return this.http.get<IRuuviTag>(this.customersBaseUrl + '/' + id)
             .pipe(
-                map(customer => {
+                map(ruuvitag => {
                     // this.calculateCustomersOrderTotal([customer]);
-                    return customer;
+                    return this.ruuviTagToCustomer(ruuvitag);
                 }),
                 catchError(this.handleError)
             );
     }
-
+/*
     insertCustomer(customer: ICustomer): Observable<ICustomer> {
         return this.http.post<ICustomer>(this.customersBaseUrl, customer)
             .pipe(catchError(this.handleError));
@@ -82,7 +82,7 @@ export class DataService {
                 catchError(this.handleError)
             );
     }
-
+*/
     getStates(): Observable<IState[]> {
         return this.http.get<IState[]>('/api/states')
             .pipe(catchError(this.handleError));
@@ -99,17 +99,48 @@ export class DataService {
         return Observable.throw(error || 'Node.js server error');
     }
 
-    // calculateCustomersOrderTotal(customers: ICustomer[]) {
-    //     for (const customer of customers) {
-    //         if (customer && customer.temperature) {
-    //             let total = 0;
-    //             for (const order of customer.orders) {
-    //                 total += order.itemCost;
-    //             }
-    //             customer.orderTotal = total;
-    //         }
-    //     }
-    // }
+    private parseHexString(str: string): number { 
+        let result = 0;
+        // Ignore any trailing single digit; I don't know what your needs
+        // are for this case, so you may want to throw an error or convert
+        // the lone digit depending on your needs.
+        str = str.replace(/^:/, '');
+         while (str.length >= 2) { 
+             result *= 256;
+             result += parseInt(str.substring(0, 2), 16)
+             str = str.substring(2, str.length);     
+        }
+
+        return result;
+    }
+
+    calculateCustomersOrderTotal(ruuvitags: IRuuviTag[]): ICustomer[] {
+        let customers: ICustomer[] = [];
+        for (const ruuvitag of ruuvitags) {
+            let customer = {
+                id: this.parseHexString(ruuvitag.id),
+                rssi: ruuvitag.rssi,
+                temperature: ruuvitag.temperature,
+                humidity: ruuvitag.humidity,
+                location: ruuvitag.location,
+                name: ruuvitag.name
+            }
+            customers.push(customer);
+        }
+        return customers;
+    }
+
+    ruuviTagToCustomer(ruuvitag: IRuuviTag): ICustomer {
+        let customer = {
+                id: this.parseHexString(ruuvitag.id),
+                rssi: ruuvitag.rssi,
+                temperature: ruuvitag.temperature,
+                humidity: ruuvitag.humidity,
+                location: ruuvitag.location,
+                name: ruuvitag.name
+        }
+        return customer;
+    }
 
     // Not using now but leaving since they show how to create
     // and work with custom observables

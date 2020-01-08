@@ -11,6 +11,15 @@ export interface ICustomer {
     humidity?: number;
 }
 
+export interface IRuuviTag {
+    id: string;
+    name: string;
+    location: string;
+    rssi: number;
+    temperature: number;
+    humidity?: number;
+}
+
 export interface IState {
     abbreviation: string;
     name: string;
