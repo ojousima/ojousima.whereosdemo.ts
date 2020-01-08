@@ -24,7 +24,8 @@ export class DataService {
 
     getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {
         return this.http.get<IRuuviTag[]>(
-            `${this.customersBaseUrl}/page/${page}/${pageSize}`,
+            //`${this.customersBaseUrl}/page/${page}/${pageSize}`,
+            "https://apps2.whereos.com/pipeline/execute?applicationid=ab8f7a55-b6b5-4f01-8921-14d8a7770b70&pipelinename=Location_API&p_location=office",
             { observe: 'response' })
             .pipe(
                 map(res => {
