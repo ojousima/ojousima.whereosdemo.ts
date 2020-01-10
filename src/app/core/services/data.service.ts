@@ -11,8 +11,9 @@ export class DataService {
 
     // Can use /api/customers and /api/orders below when running locally
     // Full domain/port is included for Docker example or if it were to run in the cloud
-    //port = '8080';
+    proxyPort = '8010';
     baseUrl = `${this.window.location.protocol}//${this.window.location.hostname}:${this.window.location.port}`;
+    proxyUrl = `${this.window.location.protocol}//${this.window.location.hostname}:${this.proxyPort}/proxy`;
     customersBaseUrl = this.baseUrl + '/api/customers';
     ordersBaseUrl = this.baseUrl + '/api/orders';
     orders: IOrder[];
@@ -25,7 +26,8 @@ export class DataService {
     getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {
         return this.http.get<IRuuviTag[]>(
             //`${this.customersBaseUrl}/page/${page}/${pageSize}`,
-            "https://apps2.whereos.com/pipeline/execute?applicationid=ab8f7a55-b6b5-4f01-8921-14d8a7770b70&pipelinename=Location_API&p_location=office",
+            // "https://apps2.whereos.com/pipeline/execute?applicationid=ab8f7a55-b6b5-4f01-8921-14d8a7770b70&pipelinename=Location_API&p_location=office",
+            `${this.proxyUrl}/pipeline/execute?applicationid=ab8f7a55-b6b5-4f01-8921-14d8a7770b70&pipelinename=Location_API&p_location=office`,
             { observe: 'response' })
             .pipe(
                 map(res => {
